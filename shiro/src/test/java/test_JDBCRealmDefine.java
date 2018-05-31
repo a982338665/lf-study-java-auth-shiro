@@ -12,7 +12,7 @@ import org.junit.Test;
  *
  *
  */
-public class test_JDBCRealm {
+public class test_JDBCRealmDefine {
 
 
     //创建数据源
@@ -32,6 +32,21 @@ public class test_JDBCRealm {
         //jdbc权限验证开关的设置--若不开 subject.checkPermission("user:select")无法识别
         jrealm.setPermissionsLookupEnabled(true);
 
+
+
+
+
+
+        //认证查询使用自己的sql语句
+        String sql=" SELECT pswd from u_user where nickname= ?";
+        jrealm.setAuthenticationQuery(sql);
+        String rolesql="SELECT t.`name` from u_user u ,u_user_role s,u_role t where u.id=s.uid and t.id=s.rid and  nickname=?";
+        jrealm.setUserRolesQuery(rolesql);
+
+
+
+
+
         //1.构建Security Manager环境
         DefaultSecurityManager manager=new DefaultSecurityManager();
         manager.setRealm(jrealm);
@@ -43,15 +58,15 @@ public class test_JDBCRealm {
         Subject subject = SecurityUtils.getSubject();
 
         //3.提交认证，登录--提交正确用户名密码
-        UsernamePasswordToken token=new UsernamePasswordToken("Mark","123456");
+        UsernamePasswordToken token=new UsernamePasswordToken("soso","123456");
         subject.login(token);
         System.out.println("登录isAuthenticated结果--->"+subject.isAuthenticated());
 
         //权限控制
-        subject.checkRole("admin");
-        subject.checkRoles("admin","user");
+        subject.checkRole("权限角色");
+        subject.checkRoles("权限角色","用户中心");
 
-        subject.checkPermission("user:select");
+//        subject.checkPermission("user:select");
 //        subject.checkPermission("user:update");
 //        subject.checkPermissions("user:update","user:delete");
 

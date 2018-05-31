@@ -40,4 +40,12 @@ Shiro认证：
     2.Securitymanager认证-->Authenticator认证-->
     3.Realm验证
 
+iniRealm/JdbcRealm/自定义Realm：-- 
+
+Shiro加密：md5 / md5+salt
+
+    1.shiro散列配置：
+        ·HashedCredentialsMatcher
+        ·自定义Realm中使用散列
+        ·盐的使用 --更加安全
 

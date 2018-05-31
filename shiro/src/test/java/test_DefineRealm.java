@@ -1,10 +1,11 @@
-import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.mgt.DefaultSecurityManager;
-import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.Subject;
 import org.junit.Test;
+import pers.li.realm.CustormRealm;
 
 /**
  * create by lishengbo on 2018-05-30 17:26
@@ -12,29 +13,40 @@ import org.junit.Test;
  *
  *
  */
-public class test_JDBCRealm {
+public class test_DefineRealm {
+
+    public static void main(String[] args) {
+
+        //md5加密计算--无盐
+        System.out.println(new Md5Hash("123456"));
+        //md5+盐
+        System.out.println(new Md5Hash("123456","Mark"));
 
 
-    //创建数据源
-    DruidDataSource dataSource=new DruidDataSource();
-
-    {
-        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/shiro");
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
     }
+
 
     @Test
     public void testAuth(){
-        //构建IniRealm
-        JdbcRealm jrealm=new JdbcRealm();
-        jrealm.setDataSource(dataSource);
-        //jdbc权限验证开关的设置--若不开 subject.checkPermission("user:select")无法识别
-        jrealm.setPermissionsLookupEnabled(true);
+        //构建自定义Realm
+        CustormRealm custormRealm = new CustormRealm();
 
         //1.构建Security Manager环境
         DefaultSecurityManager manager=new DefaultSecurityManager();
-        manager.setRealm(jrealm);
+        manager.setRealm(custormRealm);
+
+
+
+
+        //设置加密：加密方式及次数================================================
+        HashedCredentialsMatcher matcher=new HashedCredentialsMatcher();
+        matcher.setHashAlgorithmName("md5");
+        matcher.setHashIterations(1);
+        //自定义realm中设置matcher
+        custormRealm.setCredentialsMatcher(matcher);
+        //设置加密：加密方式及次数================================================
+
+
 
         //2.主体提交认证请求
         //设置环境
@@ -56,4 +68,6 @@ public class test_JDBCRealm {
 //        subject.checkPermissions("user:update","user:delete");
 
     }
+
+
 }
