@@ -49,3 +49,44 @@ Shiro加密：md5 / md5+salt
         ·自定义Realm中使用散列
         ·盐的使用 --更加安全
 
+授权：
+    
+    1.编码方式
+    2.注解方式:
+        --依赖：aspectjweaver
+        --配置：spring.xml
+        --controller添加:@RequiresRoles("admin")
+
+Shiro过滤器：
+    
+    1.内置：
+        -anon       --不需认证可直接访问
+        -authBasic  --httpbasic
+        -authc      --认证后可访问
+        -user       --需要当前存在用户才可访问
+        -logout     --退出
+        ====
+        授权相关过滤器：
+        -perms[...] --具备相关权限可访问 
+        -roles[...] --具备相关角色可访问
+        -ssl        --安全协议：https
+        -port[...]  --要求端口：...
+    2.自定义过滤器：
+        -实现后需要注入spring.xml
+        
+shiro会话管理：
+
+    1.SessionManager，SessionDao
+    2.Redis实现session共享
+    3.Redis实现session共享会出现的问题
+    
+Shiro的缓存管理：
+
+    0.主要用来缓存角色信息和权限信息，直接从缓存取，提高服务器性能
+    1.CacheManager Cache
+    2.Redis实现CacheManager
+    
+Shiro的自动登录：
+
+    
+    

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:context="http://www.springframework.org/schema/context"
+               xmlns:mvc="http://www.springframework.org/schema/mvc"
+               xmlns:util="http://www.springframework.org/schema/util"
+
+               xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+
+    <!--引入配置文件-->
+    <import resource="spring-dao.xml"/>
+    <import resource="spring-redis.xml"/>
+    <!--扫描路径-->
+    <context:component-scan base-package="pers.li"/>
+
+    
+    
+    
+    
+    
+    <!--创建shiroFilter对象-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <!--登录url-->
+        <property name="loginUrl" value="login.html"/>
+        <!--未认证url-->
+        <property name="unauthorizedUrl" value="403.html"/>
+        <!--过滤器链：由上到下依次过滤 故/* 应该放在最下面-->
+        <property name="filterChainDefinitions">
+            <value>
+                <!--不用验证可直接访问-->
+                /login.html = anon
+                /subLogin = anon
+
+                <!--满足相关条件才可以访问 默认filter-->
+                /role1 = roles["admin"]
+                /role2 = roles["admin","admin1"]
+                /testPerms = perms["user:delete"]
+                /testPerms1 = perms["user:delete","user:select"]
+
+
+                <!--自定义filter：含有参数列表中的任意一个，即可访问该方法-->
+                /role3 = rolesOr["admin","admin1"]
+
+
+                <!--经过认证才能访问的路径-->
+                /* = authc
+            </value>
+        </property>
+        <property name="filters">
+            <util:map>
+                <entry key="rolesOr" value-ref="rolesOrFilter"/>
+            </util:map>
+        </property>
+    </bean>
+
+
+
+    <!--注入自定义角色限制filter-->
+    <bean class="pers.li.filter.RolesOrFilter" id="rolesOrFilter"/>
+
+
+
+
+    <!--注入sessionManger-->
+    <!--<bean class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager" id="sessionManager">-->
+    <!--使用自定义sessionManager-->
+    <bean class="pers.li.session.CustomSessionManager" id="sessionManager">
+        <property name="sessionDAO" ref="redisSessionDao"/>
+    </bean>
+    <bean class="pers.li.session.RedisSessionDao" id="redisSessionDao"/>
+
+
+    <!--注入RedisCacheManager对象-->
+    <bean class="pers.li.cache.RedisCacheManager" id="cacheManager"/>
+
+
+
+
+    <!--创建 web SecurityManager============================================================-->
+    <bean class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" id="securityManager">
+        <property name="realm" ref="realm"/>
+        <!--配置sessionmanager-->
+        <property name="sessionManager" ref="sessionManager"/>
+        <!--配置cacheManager-->
+        <property name="cacheManager" ref="cacheManager"/>
+        <!--注入cookie-->
+        <property name="rememberMeManager" ref="cookieRememberMeManager"/>
+    </bean>
+
+    <!--创建自定义realm 设置进 SecurityManager-->
+    <bean id="realm" class="pers.li.shiro.realm.CustormRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher"/>
+    </bean>
+
+    <!--新增加密管理器对象-->
+    <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher"  id="credentialsMatcher">
+        <property name="hashAlgorithmName" value="md5"/>
+        <property name="hashIterations" value="1"/>
+    </bean>
+
+
+    <!--自动登录实现============================================================================-->
+    <bean class="org.apache.shiro.web.mgt.CookieRememberMeManager" id="cookieRememberMeManager">
+        <property name="cookie" ref="cookie"/>
+    </bean>
+    <bean class="org.apache.shiro.web.servlet.SimpleCookie" id="cookie">
+        <constructor-arg value="rememberMe"/>
+        <!--cookie存活时间，单位为秒-->
+        <property name="maxAge" value="200000000"/>
+    </bean>
+
+</beans>

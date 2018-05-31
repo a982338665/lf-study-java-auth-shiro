@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Auth-Shiro.iml" filepath="$PROJECT_DIR$/.idea/Auth-Shiro.iml" />
       <module fileurl="file://$PROJECT_DIR$/shiro/shiro.iml" filepath="$PROJECT_DIR$/shiro/shiro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/shiro-spring/shiro-spring.iml" filepath="$PROJECT_DIR$/shiro-spring/shiro-spring.iml" />
     </modules>
   </component>
 </project>
