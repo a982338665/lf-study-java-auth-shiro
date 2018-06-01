@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>shiro 首页</title>
+</head>
+<body>
+        <h2>Shiro首页--------</h2>
+
+
+</body>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+
+<script>
+    $(function () {
+        alert(123)
+        //获取角色信息----若为多个，默认选择第一个角色
+        $.ajax({
+            type:'get',
+            url:'/users/getRoleMenu',
+            cache:false,
+            dataType:'json',
+            success:function(data){
+                if(data.code===200){
+                    alert(data.message)
+                }else{
+                    alert(data.message)
+                }
+            }
+        });
+    });
+</script>
+</html>

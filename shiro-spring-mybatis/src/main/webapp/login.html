@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录首页</title>
+</head>
+<body>
+       <form action="#" onsubmit="false" id="form1" method="post">
+           用户名：<input type="text" name="username"><br>
+           密码：<input type="password" name="password"><br>
+           <input type="checkbox" name="rememberMe" >记住密码<br>
+           <input type="button" value="登录" id="get"><br>
+
+       </form>
+</body>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script>
+
+    //以下data传值的类型：
+//    username=user&password=123456
+//    login.html:21 username=user&password=123456&rememberMe=on
+
+
+
+    $("#get").click(function () {
+        console.log($('#form1').serialize());
+        $.ajax({
+            type:'post',
+            url:'/users/login',
+            data:$("#form1").serialize(),
+            cache:false,
+            dataType:'json',
+            success:function(data){
+                if(data.code===200){
+                    window.location.href="/index.html";
+                }else{
+                    alert(data.message)
+                }
+            }
+        });
+    });
+
+
+
+</script>
+</html>
