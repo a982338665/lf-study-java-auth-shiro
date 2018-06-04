@@ -76,7 +76,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
             Collection<Object> attributeKeys = session.getAttributeKeys();
             for (Object s : attributeKeys
                     ) {
-                logger.error("读取key:"+s+"  //"+session.getAttribute(s));
+//                logger.error("读取key:"+s+"  //"+session.getAttribute(s));
             }
         }
         //反序列化为session对象

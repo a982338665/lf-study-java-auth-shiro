@@ -42,10 +42,15 @@ public class CustormRealm extends AuthorizingRealm {
         Set<String> roles=getRolesBYUserName(userName);
         //3.权限
         Map<String, Set<String>> perss=getPermissionBYUserName(roles);
+        Collection<Set<String>> values = perss.values();
+        Set<String> set=new HashSet<String>();
+        for (Set<String> s:values){
+            set.addAll(s);
+        }
         //4.创建返回信息
         SimpleAuthorizationInfo simpleAuthorizationInfo=new SimpleAuthorizationInfo();
         simpleAuthorizationInfo.setRoles(roles);
-//        simpleAuthorizationInfo.setStringPermissions(perss);
+        simpleAuthorizationInfo.setStringPermissions(set);
         return simpleAuthorizationInfo;
     }
 
@@ -94,8 +99,12 @@ public class CustormRealm extends AuthorizingRealm {
         if(passWord==null){
             return null;
         }
+        //2.通过用户名到数据库/缓存中获取角色信息--模拟数据库查询
+        Set<String> roles=getRolesBYUserName(userName);
+        //3.权限
+        Map<String, Set<String>> perss=getPermissionBYUserName(roles);
         //创建返回信息
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(userName,passWord,"customRealm");
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(perss,passWord,"customRealm");
 
         //盐的设置 TODO
         authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(PropertyUtil.getProperty("salt")));
