@@ -80,7 +80,13 @@ public class UserController {
 
 
 
-    //提交
+    //提交--
+    //本机时间的修改会引起：
+    //  1.谷歌浏览器无法访问百度：即 您的连接不是私密连接--https访问异常
+    //  2.git clone和提交都有问题-显示错误为：SSL certificate problem: certificate is not yet valid
+    //解决：本机时间设置改为自动获取
+
+
     //++++++++++++++++++++将注解配置加在spring.xml+++++++++++++++++++++++
     *//**
      * @return
