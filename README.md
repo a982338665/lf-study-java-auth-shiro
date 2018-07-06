@@ -86,7 +86,19 @@ Shiro的缓存管理：
     1.CacheManager Cache
     2.Redis实现CacheManager
     
-Shiro的自动登录：
+Shiro的自动登录：--
 
-    
+**SpringBoot+Shiro**
+
+    1.SpringBoot项目中启动类必须在代码的父级目录，平级目录下会影响扫描controller
+    2.SpringBoot项目存放页面的固定位置：src\main\resources\templates
+    3.org.xml.sax.SAXParseException: 元素类型 "meta" 必须由匹配的结束标记 "</meta>" 终止:
+        错误原因：在thymeleaf3.0以前对页面标签的语法较严格，有开始标签，必要有结束标签
+        版本升级：修改thymeleaf版本--pom.xml--properties属性
+    4.Shiro的核心Api--
+    5.编写shiro配置类:--包含realm
+    6.使用Shiro内置过滤器实现页面拦截(需要使用controller进行页面跳转)
+    7.整合mybatis:
+        `添加依赖
+        `application.properties文件创建
     
