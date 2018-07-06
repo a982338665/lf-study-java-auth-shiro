@@ -1,5 +1,6 @@
 package pers.li.shirospringboot.shiro;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,10 +39,16 @@ public class ShiroConfig {
         map.put("/testhtml","anon");*/
         map.put("/login.do","anon");
 
+        //添加授权过滤器:授权拦截后会跳转到未授权页面
+        map.put("/user/add","perms[user:add]");
+        map.put("/user/update","perms[user:update]");
+
         map.put("/*","authc");
 
         //修改认证页面--登录页面走接口
         shiroFilterFactoryBean.setLoginUrl("/user/login");
+        //设置未授权提示页面
+        shiroFilterFactoryBean.setUnauthorizedUrl("/user/unAuthor");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
 
         return shiroFilterFactoryBean;
@@ -69,5 +76,13 @@ public class ShiroConfig {
     @Bean(name = "userRealm")
     public UserRealm getRealm(){
         return new UserRealm();
+    }
+
+    /**
+     * 配置ShiroDialect--整合shiro标签
+     */
+    @Bean
+    public ShiroDialect getShiroDialect(){
+        return  new ShiroDialect();
     }
 }

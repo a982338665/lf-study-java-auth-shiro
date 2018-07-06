@@ -10,6 +10,15 @@ public class User {
     private String name;
 
     private String pass;
+    private String perm;
+
+    public String getPerm() {
+        return perm;
+    }
+
+    public void setPerm(String perm) {
+        this.perm = perm;
+    }
 
     public Integer getId() {
         return id;

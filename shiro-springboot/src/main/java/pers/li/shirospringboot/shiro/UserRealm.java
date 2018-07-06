@@ -1,9 +1,13 @@
 package pers.li.shirospringboot.shiro;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import pers.li.shirospringboot.domain.User;
 import pers.li.shirospringboot.service.UserService;
@@ -27,7 +31,23 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        System.out.println("授权+++++++++++++++++++++++++=");
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        //添加授权字符串--要与ShiroConfig中的对应
+        //simpleAuthorizationInfo.addStringPermission("user:add");
+        //改为数据库获取：
+        //1.获取主体Subject
+        Subject subject = SecurityUtils.getSubject();
+        Object principal = subject.getPrincipal();
+        User user=(User)principal;
+        //模拟查询--不新写sql了：根据id获取授权资源信息
+        //添加授权字符串
+        simpleAuthorizationInfo.addStringPermission(user.getPerm());
+
+
+
+        return simpleAuthorizationInfo;
+
     }
 
     /**
@@ -60,8 +80,9 @@ public class UserRealm extends AuthorizingRealm {
         // 第二个-数据库密码
         // 第三个-该realm的名称--可为""
 
-
-        return new SimpleAuthenticationInfo("",byname.getPass(),"");
+        //byname可以再subject中取出来
+        return new SimpleAuthenticationInfo(byname,byname.getPass(),"");
 
     }
+
 }

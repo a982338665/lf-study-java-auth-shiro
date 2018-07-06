@@ -9,12 +9,14 @@
         <module name="shiro" />
         <module name="shiro-spring" />
         <module name="shiro-spring-mybatis" />
+        <module name="shiro-springboot" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="shiro" target="1.5" />
       <module name="shiro-spring" target="1.5" />
       <module name="shiro-spring-mybatis" target="1.5" />
+      <module name="shiro-springboot" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

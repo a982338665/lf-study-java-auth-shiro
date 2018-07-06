@@ -101,4 +101,8 @@ Shiro的自动登录：--
     7.整合mybatis:
         `添加依赖
         `application.properties文件创建
-    
+    8.实现用户授权
+    9.数据库动态授权
+    10.页面展示整合-shiro标签:
+        1.添加拓展依赖
+        2.ShiroConfig中ShiroDialect的配置
