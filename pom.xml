@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>pers.li.shiro</groupId>
+    <artifactId>lf-study-java-auth-shiro</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>shiro-spring</module>
+        <module>shiro-springboot</module>
+        <module>shiro-spring-mybatis</module>
+        <module>shiro</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <name>lf-study-java-auth-shiro</name>
+    <description>Demo project for Spring Boot</description>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
