@@ -11,6 +11,7 @@
         <module>shiro-springboot</module>
         <module>shiro-spring-mybatis</module>
         <module>shiro</module>
+        <module>shiro-spring-boot-mybatis-plus</module>
     </modules>
     <packaging>pom</packaging>
 
