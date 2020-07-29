@@ -16,6 +16,10 @@ import pers.li.boot.dao.common.UserDao;
 import javax.sql.DataSource;
 
 //这里配置mapper所在的包
+
+/**
+ * basePackageClasses 会扫描类 及当前所在包及包下的所有Mapper
+ */
 @Configuration
 @MapperScan(basePackages = {"pers.li.boot.dao.test1"},basePackageClasses = {UserDao.class},sqlSessionTemplateRef = "test1SqlSessionTemplate")
 public class DataSource1Config {
