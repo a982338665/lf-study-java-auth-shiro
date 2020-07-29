@@ -109,6 +109,9 @@
       持久性：事务完成之后，它对于系统的影响是永久性的。
     
 ## 10-SpringBoot集成多数据源
+    
+    通过扫描不同的包，控制数据源访问
+
 ## 11-SpringBoot集成MybatisPlus
 ## 12-MybatisPlus使用介绍
 ## 13-SpringBoot集成lombok
