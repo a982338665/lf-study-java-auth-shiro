@@ -65,7 +65,22 @@
        问题：换成1.jpg好像访问不通
     
 ## 05-SpringBoot捕获全局异常
+    
+    GlobalExceptionHandler
+    
 ## 06-SpringBoot集成Thymeleaf
+
+    1.JSP会被编译成Servlet，重量级的
+    2.前后端分离模板引擎：
+        Thymeleaf
+        FreeMarker
+        Groovy
+    3.使用：
+        引依赖
+        加配置
+        加controller
+        访问127.0.0.1:8080/index就可以跳转到我们的index.html页面了
+    
 ## 07-Thymeleaf数据展示
 ## 08-SpringBoot集成Mybatis
 ## 09-SpringBoot事务管理
