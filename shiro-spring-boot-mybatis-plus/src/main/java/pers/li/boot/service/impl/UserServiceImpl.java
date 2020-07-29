@@ -2,7 +2,7 @@ package pers.li.boot.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pers.li.boot.dao.UserDao;
+import pers.li.boot.dao.common.UserDao;
 import pers.li.boot.entities.User;
 import pers.li.boot.service.UserService;
 

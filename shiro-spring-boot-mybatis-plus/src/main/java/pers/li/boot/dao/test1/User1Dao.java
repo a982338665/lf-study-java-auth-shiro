@@ -1,4 +1,4 @@
-package pers.li.boot.dao;
+package pers.li.boot.dao.test1;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,7 +13,7 @@ import pers.li.boot.entities.User;
  * @Description :
  */
 @Mapper
-public interface UserDao {
+public interface User1Dao {
     @Select("select * from user where id = #{id}")
     User selectUserById(@Param("id") Integer id);
 
