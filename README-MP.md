@@ -82,6 +82,21 @@
         访问127.0.0.1:8080/index就可以跳转到我们的index.html页面了
     
 ## 07-Thymeleaf数据展示
+    
+    1.集成jsp需要去除模板引擎：
+        依赖：
+            <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            </dependency>
+            <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            </dependency>
+         配置文件：
+            spring.mvc.view.prefix=/WEB-INF/jsp/
+            spring.mvc.view.suffix=.jsp
+    
 ## 08-SpringBoot集成Mybatis
 ## 09-SpringBoot事务管理
 ## 10-SpringBoot集成多数据源
