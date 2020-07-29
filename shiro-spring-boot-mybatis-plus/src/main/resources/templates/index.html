@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
     <meta charset="UTF-8" />
     <title></title>
 </head>
 <body>
-<h2>Welcome To Majiaxueyuan For Study</h2>
+<!--<h2>Welcome To Majiaxueyuan For Study</h2>-->
+<!--<h2 th:text="${name}"></h2>-->
+<input type="text" class="layui-input" th:value="${name}" />
+<li th:text="${name}"></li>
+<table border="1">  
+     <tr>  
+           <th>用户名</th>  
+           <th>邮箱</th>  
+         </tr>  
+     <tr th:each="user : ${userlist}">  
+            <td th:text="${user.userName}">Onions</td>  
+            <td th:text="${user.email}">test@test.com.cn</td>
+         </tr>
+</table>
+<li th:if="${name == null}">为空才显示</li>
+<a th:href="${name}"></a>
 </body>
 </html>
