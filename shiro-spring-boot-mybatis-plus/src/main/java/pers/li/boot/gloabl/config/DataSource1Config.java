@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import pers.li.boot.dao.common.UserDao;
+import pers.li.boot.dao.common.UserMPDao;
 
 import javax.sql.DataSource;
 
@@ -20,8 +21,8 @@ import javax.sql.DataSource;
 /**
  * basePackageClasses 会扫描类 及当前所在包及包下的所有Mapper
  */
-@Configuration
-@MapperScan(basePackages = {"pers.li.boot.dao.test1"},basePackageClasses = {UserDao.class},sqlSessionTemplateRef = "test1SqlSessionTemplate")
+//@Configuration
+//@MapperScan(basePackages = {"pers.li.boot.dao.test1"},basePackageClasses = {UserDao.class, UserMPDao.class},sqlSessionTemplateRef = "test1SqlSessionTemplate")
 public class DataSource1Config {
 
     @Bean(name = "test1DataSource")

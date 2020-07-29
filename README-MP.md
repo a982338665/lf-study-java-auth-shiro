@@ -113,6 +113,9 @@
     通过扫描不同的包，控制数据源访问
 
 ## 11-SpringBoot集成MybatisPlus
+
+    1.官网：http://baomidou.oschina.io/mybatis-plus-doc/
+    
 ## 12-MybatisPlus使用介绍
 ## 13-SpringBoot集成lombok
 ## 14-SpringBoot集成Shiro

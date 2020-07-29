@@ -15,8 +15,8 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
 //这里配置mapper所在的包
-@Configuration
-@MapperScan(basePackages = "pers.li.boot.dao.test2", sqlSessionTemplateRef = "test2SqlSessionTemplate")
+//@Configuration
+//@MapperScan(basePackages = "pers.li.boot.dao.test2", sqlSessionTemplateRef = "test2SqlSessionTemplate")
 public class DataSource2Config {
 
     @Bean(name = "test2DataSource")
