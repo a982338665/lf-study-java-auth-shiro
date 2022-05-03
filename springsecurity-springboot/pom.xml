@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>pers.li</groupId>
-	<artifactId>shiro-springboot</artifactId>
+	<artifactId>springsecurity-springboot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>shiro-springboot</name>
+	<name>springsecurity-springboot</name>
 	<description>Demo project for Spring Boot</description>
 
 	<!--继承默认的spring-boot父工程-->
